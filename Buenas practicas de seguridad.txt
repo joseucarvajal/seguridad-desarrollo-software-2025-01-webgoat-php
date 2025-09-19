@@ -1,0 +1,33 @@
+1. Los valores con información sensible, no se deben exponer en el código. Ejemplo:
+- Los valores de acceso a la base de datos (host, usuario, contraseña) se encuentran expuestos en el archivo: docker-compose.yml
+en su lugar, estos valores deben almacenarse y consultarse a partir de un secret-store. Ejemplos de secret-store:
+- AWS Secrets Manager
+- HashiCorp Vault
+- Kubernetes secrets
+- GCP Secret Manager
+
+2. Estos secrets es recomendable almacenarlos cifrados
+
+3. Técnicas defensivas contra ataques var_dump: Los valores sensibles deben ser lo más temporales posibles, es decir, una vez se utilicen estos valores, se deben setear a null para limpiarlos de la memoria:
+Ejemplo:
+    database_password = null
+
+4. Para valores sensibles (ejemplo: usuario de base de datos). No utilizar valores comunes.
+    Ejemplo: en el archivo "docker-compose.yml" el usuario de la base de datos es: root. Esto es una mala practica.
+
+5. Principio de diseño de seguridad: Principio de menor privilegio. En el caso de esta aplicación no deberíamos utilizar el usuario "root" de la base de datos porque la aplicación web se puede volver un vector de ataque hacia la base de datos, dado que este usuario puede realizar cualquier tipo de operaciones peligrosas:
+- Borrar tablas
+- Modificar información
+- Eliminar información
+- Eliminar otros usuario ... etc.
+
+6. Evitar contraseñas débiles. En esta aplicación la clave del usuario de la base de datos tiene el valor: "password", lo cual hace que sea predecible y un potencial vector de ataque
+
+7. Seguridad por defecto en las capas más bajas de la aplicación.
+Ejemplo: En la presente aplicación la restricción de que el email tiene que ser único se especifica en la capa más baja que es base de datos. En el archivo "init.sql" al momento de crear la tabla de "users" especificamos:
+    - username VARCHAR(50) UNIQUE NOT NULL,
+    - email VARCHAR(100) UNIQUE NOT NULL,
+
+8. Auditoría y trazabilidad: Capturar información de contexto que nos permita determinar, auditar y realizar un seguimiento (trazabilidad) a los cambios de información realizados en el sistema.
+
+
