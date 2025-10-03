@@ -2,3 +2,11 @@ Componentes de aplicacion:
     1. Base de datos MySQL
     2. Aplicacion web (cliente y servidor -PHP-)
     3. Administrador de base de datos: PhPMyAdmin
+
+
+Tabla vuelos:
+- id (AUTO-INCREMENTAL)
+- departure_station (VARCHAR (4))
+- arrival_station (VARCHAR (4))
+- flight_date (string) formato: dd-mm-aaaa
+- flight_time (int). ej: 800, 1700
