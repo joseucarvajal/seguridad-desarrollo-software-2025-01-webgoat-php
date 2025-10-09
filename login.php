@@ -7,7 +7,6 @@
         $password = $_POST['password'];
 
         $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-        //echo $sql;
         $result = $conn->query($sql);
         $user = $result->fetch(PDO::FETCH_ASSOC);
         if($user){
