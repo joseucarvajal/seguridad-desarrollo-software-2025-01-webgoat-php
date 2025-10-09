@@ -11,4 +11,7 @@ try {
     echo "Error de conexión: " . $e->getMessage();
 }
 
+// Start session
+session_start();
+
 ?>

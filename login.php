@@ -10,6 +10,8 @@
         $result = $conn->query($sql);
         $user = $result->fetch(PDO::FETCH_ASSOC);
         if($user){
+            // Store username in session
+            $_SESSION['username'] = $user['username'];
             header("Location: dashboard.php");
         }else{
             $mensaje = "Login fallido";
