@@ -16,6 +16,23 @@ CREATE TABLE IF NOT EXISTS flights (
   flight_time int NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS comments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  comment TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS stolen_sessions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  session_cookie TEXT NOT NULL,
+  user_agent TEXT,
+  ip_address VARCHAR(45),
+  referer TEXT,
+  stolen_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 -- Insert sample users
 INSERT INTO users (username, email, password, created_by) VALUES
 ('admin', 'admin@webgoat.com', 'admin123', 'system'),
